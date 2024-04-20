@@ -1,4 +1,4 @@
-package com.example.savrd
+package com.savrd.savrd
 
 import io.flutter.embedding.android.FlutterActivity
 
