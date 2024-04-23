@@ -50,7 +50,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 2,
       //TODO: create a sliverapp bar with custom scroll view
       child: Scaffold(
@@ -95,41 +95,36 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         
         body: TabBarView(
           children: <Widget>[
-            const Center(
-              child: Text("It's cloudy here"),
-            ),
+            Text("It's cloudy here"),
             
-            SafeArea(
-              top: false,
-              bottom: false,
-              child: ListView.builder(
-                // Providing a restorationId allows the ListView to restore the
-                // scroll position when a user leaves and returns to the app after it
-                // has been killed while running in the background.
-                restorationId: 'sampleItemListView',
-                itemCount: widget.items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = widget.items[index];
-              
-                  return PostTile(post: item);
-                  // ListTile(
-                  //   title: Text('Item ${item.id}'),
-                  //   leading: const CircleAvatar(
-                  //     // Display the Flutter Logo image asset.
-                  //     foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-                  //   ),
-                  //   onTap: () {
-                  //     // Navigate to the details page. If the user leaves and returns to
-                  //     // the app after it has been killed while running in the
-                  //     // background, the navigation stack is restored.
-                  //     Navigator.restorablePushNamed(
-                  //       context,
-                  //       SampleItemDetailsView.routeName,
-                  //     );
-                  //   }
-                  // );
-                },
-              ),
+            ListView.builder(
+              // Providing a restorationId allows the ListView to restore the
+              // scroll position when a user leaves and returns to the app after it
+              // has been killed while running in the background.
+              restorationId: 'sampleItemListView',
+              padding: EdgeInsets.zero,
+              itemCount: widget.items.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = widget.items[index];
+            
+                return PostTile(post: item);
+                // ListTile(
+                //   title: Text('Item ${item.id}'),
+                //   leading: const CircleAvatar(
+                //     // Display the Flutter Logo image asset.
+                //     foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+                //   ),
+                //   onTap: () {
+                //     // Navigate to the details page. If the user leaves and returns to
+                //     // the app after it has been killed while running in the
+                //     // background, the navigation stack is restored.
+                //     Navigator.restorablePushNamed(
+                //       context,
+                //       SampleItemDetailsView.routeName,
+                //     );
+                //   }
+                // );
+              },
             ),
           ],
         ),
