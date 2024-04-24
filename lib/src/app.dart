@@ -117,6 +117,7 @@ class MyApp extends StatelessWidget {
 
 ThemeData _buildTheme() {
   var baseTheme = ThemeData();
+  const colorScheme = ColorScheme(brightness: Brightness.light, surfaceTint: Colors.transparent, primary: Color(0xFF958D77), onPrimary: Color(0xFFFCF6E6), secondary: Color(0xFF809671), onSecondary: Color(0xFFFCF6E6), error: Color(0xFFFF6961), onError: Color(0xFFFFFAFA), background: Color(0xFFFCF6E6), onBackground: Color(0xFF958D77), surface: Color(0xFFFCF6E6), onSurface: Color(0xFF958D77));
 
   return baseTheme.copyWith(
     textTheme: GoogleFonts.ptSerifTextTheme(baseTheme.textTheme).copyWith(
@@ -127,6 +128,9 @@ ThemeData _buildTheme() {
       labelLarge: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelLarge),
       labelMedium: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelMedium),
       labelSmall: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelSmall),
-    ),
-  );
+    ).apply(bodyColor: colorScheme.primary, displayColor: colorScheme.primary),
+    scaffoldBackgroundColor: const Color(0xFFFCF6E6),
+    colorScheme: colorScheme,
+    iconTheme: IconThemeData(color: colorScheme.primary)
+    );
 }

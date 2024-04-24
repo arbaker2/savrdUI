@@ -60,83 +60,85 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         // In contrast to the default ListView constructor, which requires
         // building all Widgets up front, the ListView.builder constructor lazily
         // builds Widgets as they’re scrolled into view.
-        body: NestedScrollView( headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[SliverAppBar(
-            toolbarHeight: 45,
-            //TODO: can these be removed handled in body?
-            floating: true,
-            expandedHeight: 0,
-            snap: true,
-            forceElevated: innerBoxIsScrolled,
-          title: const ImageIcon(AssetImage('assets/images/green_dutch_oven.png'), size: 45,),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
-            ),
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(_tabHeight),
-            child: SizedBox(
-              height: _tabHeight,
-              child: const TabBar(
-                dividerHeight: 0,
-                tabs: <Widget>[
-                  Tab(
-                    text: 'discover',
-                    //height: 10,
-                  ),
-                  Tab(
-                    text: 'following',
-                    //height: 10,
-                  ),
-                ],
+        body: SafeArea(
+          child: NestedScrollView( headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[SliverAppBar(
+              toolbarHeight: 45,
+              //TODO: can these be removed handled in body?
+              floating: true,
+              expandedHeight: 0,
+              snap: true,
+              forceElevated: innerBoxIsScrolled,
+            title: ImageIcon(AssetImage('assets/images/green_dutch_oven.png'), size: 45, color: Theme.of(context).colorScheme.secondary,),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  // Navigate to the settings page. If the user leaves and returns
+                  // to the app after it has been killed while running in the
+                  // background, the navigation stack is restored.
+                  Navigator.restorablePushNamed(context, SettingsView.routeName);
+                },
+              ),
+            ],
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(_tabHeight),
+              child: SizedBox(
+                height: _tabHeight,
+                child: const TabBar(
+                  dividerHeight: 0,
+                  tabs: <Widget>[
+                    Tab(
+                      text: 'discover',
+                      //height: 10,
+                    ),
+                    Tab(
+                      text: 'following',
+                      //height: 10,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        ];},
-        
-        body: TabBarView(
-          children: <Widget>[
-            Text("It's cloudy here"),
-            
-            ListView.builder(
-              // Providing a restorationId allows the ListView to restore the
-              // scroll position when a user leaves and returns to the app after it
-              // has been killed while running in the background.
-              restorationId: 'sampleItemListView',
-              padding: EdgeInsets.zero,
-              itemCount: widget.items.length,
-              itemBuilder: (BuildContext context, int index) {
-                final item = widget.items[index];
-            
-                return PostTile(post: item);
-                // ListTile(
-                //   title: Text('Item ${item.id}'),
-                //   leading: const CircleAvatar(
-                //     // Display the Flutter Logo image asset.
-                //     foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-                //   ),
-                //   onTap: () {
-                //     // Navigate to the details page. If the user leaves and returns to
-                //     // the app after it has been killed while running in the
-                //     // background, the navigation stack is restored.
-                //     Navigator.restorablePushNamed(
-                //       context,
-                //       SampleItemDetailsView.routeName,
-                //     );
-                //   }
-                // );
-              },
-            ),
-          ],
-        ),
+          ];},
+          
+          body: TabBarView(
+            children: <Widget>[
+              Text("It's cloudy here"),
+              
+              ListView.builder(
+                // Providing a restorationId allows the ListView to restore the
+                // scroll position when a user leaves and returns to the app after it
+                // has been killed while running in the background.
+                restorationId: 'sampleItemListView',
+                padding: EdgeInsets.zero,
+                itemCount: widget.items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = widget.items[index];
+              
+                  return PostTile(post: item);
+                  // ListTile(
+                  //   title: Text('Item ${item.id}'),
+                  //   leading: const CircleAvatar(
+                  //     // Display the Flutter Logo image asset.
+                  //     foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+                  //   ),
+                  //   onTap: () {
+                  //     // Navigate to the details page. If the user leaves and returns to
+                  //     // the app after it has been killed while running in the
+                  //     // background, the navigation stack is restored.
+                  //     Navigator.restorablePushNamed(
+                  //       context,
+                  //       SampleItemDetailsView.routeName,
+                  //     );
+                  //   }
+                  // );
+                },
+              ),
+            ],
+          ),
+          ),
         ),
         bottomNavigationBar: NavigationBar(
           height: 50,
