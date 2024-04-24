@@ -24,7 +24,7 @@ class PostTile extends StatelessWidget {
               child: Image.asset('assets/images/jambalya.jpg'),
             ),
           ),
-          Text(post.title),
+          Text(post.title, style: Theme.of(context).textTheme.displayLarge,),
           IntrinsicHeight(child: Row(children: [Text(post.time!.toString()), VerticalDivider(), Text(post.servings!),],)),
           // generate tag widgets from list of strings
           if (post.tags != null) IntrinsicHeight(

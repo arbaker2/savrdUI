@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:savrd/src/sample_feature/post_tile.dart';
 
 import '../settings/settings_view.dart';
 import 'post.dart';
-import 'sample_item_details_view.dart';
 
+
+double _tabHeight = 30;
 /// Displays a list of SampleItems.
 class SampleItemListView extends StatefulWidget {
   const SampleItemListView({
@@ -52,10 +52,8 @@ class _SampleItemListViewState extends State<SampleItemListView> {
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
-      //TODO: create a sliverapp bar with custom scroll view
       child: Scaffold(
         
-        //TODO: remove padding from top of nested croll view
         // To work with lists that may contain a large number of items, it’s best
         // to use the ListView.builder constructor.
         //
@@ -64,6 +62,8 @@ class _SampleItemListViewState extends State<SampleItemListView> {
         // builds Widgets as they’re scrolled into view.
         body: NestedScrollView( headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[SliverAppBar(
+            toolbarHeight: 45,
+            //TODO: can these be removed handled in body?
             floating: true,
             expandedHeight: 0,
             snap: true,
@@ -80,15 +80,24 @@ class _SampleItemListViewState extends State<SampleItemListView> {
               },
             ),
           ],
-          bottom: const TabBar(
-            tabs: <Widget>[
-              Tab(
-                text: 'discover',
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(_tabHeight),
+            child: SizedBox(
+              height: _tabHeight,
+              child: const TabBar(
+                dividerHeight: 0,
+                tabs: <Widget>[
+                  Tab(
+                    text: 'discover',
+                    //height: 10,
+                  ),
+                  Tab(
+                    text: 'following',
+                    //height: 10,
+                  ),
+                ],
               ),
-              Tab(
-                text: 'following',
-              ),
-            ],
+            ),
           ),
         ),
         ];},
