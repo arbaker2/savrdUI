@@ -14,10 +14,10 @@ class SampleItemListView extends StatefulWidget {
       Post(
           id: 1,
           imageAssetLocation: 'location',
-          title: 'post1',
+          title: 'Honey Harrisa Salmon',
           time: 30,
           servings: '4',
-          account: 'account 1',
+          account: 'Savrd Food',
           tags: ['Easy Dinner', 'GF', 'Seafood']),
       Post(
           id: 2,
@@ -52,6 +52,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
+      animationDuration: Duration(milliseconds: 800),
       child: Scaffold(
         
         // To work with lists that may contain a large number of items, it’s best
@@ -141,7 +142,6 @@ class _SampleItemListViewState extends State<SampleItemListView> {
           ),
         ),
         bottomNavigationBar: NavigationBar(
-          height: 50,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           selectedIndex: currentPageIndex,
           onDestinationSelected: (int index) {

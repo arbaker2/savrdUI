@@ -23,32 +23,32 @@ class MyApp extends StatelessWidget {
 
     //TODO: should this be defined in another block?
     // Configure Text theme
-  //   final TextTheme textTheme = TextTheme(
-  //   displayLarge: GoogleFonts.ptSerif(
-  //       fontSize: 102, fontWeight: FontWeight.w300, letterSpacing: -1.5),
-  //   displayMedium: GoogleFonts.ptSerif(
-  //       fontSize: 64, fontWeight: FontWeight.w300, letterSpacing: -0.5),
-  //   displaySmall: GoogleFonts.ptSerif(fontSize: 51, fontWeight: FontWeight.w400),
-  //   headlineMedium: GoogleFonts.ptSerif(
-  //       fontSize: 36, fontWeight: FontWeight.w400, letterSpacing: 0.25),
-  //   headlineSmall: GoogleFonts.ptSerif(fontSize: 25, fontWeight: FontWeight.w400),
-  //   titleLarge: GoogleFonts.ptSerif(
-  //       fontSize: 21, fontWeight: FontWeight.w500, letterSpacing: 0.15),
-  //   titleMedium: GoogleFonts.ptSerif(
-  //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.15),
-  //   titleSmall: GoogleFonts.ptSerif(
-  //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 0.1),
-  //   bodyLarge: GoogleFonts.ptSans(
-  //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.5),
-  //   bodyMedium: GoogleFonts.ptSans(
-  //       fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.25),
-  //   labelLarge: GoogleFonts.ptSans(
-  //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 1.25),
-  //   bodySmall: GoogleFonts.ptSans(
-  //       fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.4),
-  //   labelSmall: GoogleFonts.ptSans(
-  //       fontSize: 11, fontWeight: FontWeight.w400, letterSpacing: 1.5),
-  // );
+    //   final TextTheme textTheme = TextTheme(
+    //   displayLarge: GoogleFonts.ptSerif(
+    //       fontSize: 102, fontWeight: FontWeight.w300, letterSpacing: -1.5),
+    //   displayMedium: GoogleFonts.ptSerif(
+    //       fontSize: 64, fontWeight: FontWeight.w300, letterSpacing: -0.5),
+    //   displaySmall: GoogleFonts.ptSerif(fontSize: 51, fontWeight: FontWeight.w400),
+    //   headlineMedium: GoogleFonts.ptSerif(
+    //       fontSize: 36, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+    //   headlineSmall: GoogleFonts.ptSerif(fontSize: 25, fontWeight: FontWeight.w400),
+    //   titleLarge: GoogleFonts.ptSerif(
+    //       fontSize: 21, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+    //   titleMedium: GoogleFonts.ptSerif(
+    //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.15),
+    //   titleSmall: GoogleFonts.ptSerif(
+    //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+    //   bodyLarge: GoogleFonts.ptSans(
+    //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+    //   bodyMedium: GoogleFonts.ptSans(
+    //       fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+    //   labelLarge: GoogleFonts.ptSans(
+    //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 1.25),
+    //   bodySmall: GoogleFonts.ptSans(
+    //       fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.4),
+    //   labelSmall: GoogleFonts.ptSans(
+    //       fontSize: 11, fontWeight: FontWeight.w400, letterSpacing: 1.5),
+    // );
     // Glue the SettingsController to the MaterialApp.
     //
     // The ListenableBuilder Widget listens to the SettingsController for changes.
@@ -87,7 +87,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: _buildTheme(),//ThemeData(textTheme: GoogleFonts.ptSerifTextTheme(textTheme)),
+          theme:
+              _buildTheme(), //ThemeData(textTheme: GoogleFonts.ptSerifTextTheme(textTheme)),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
@@ -117,20 +118,73 @@ class MyApp extends StatelessWidget {
 
 ThemeData _buildTheme() {
   var baseTheme = ThemeData();
-  const colorScheme = ColorScheme(brightness: Brightness.light, surfaceTint: Colors.transparent, primary: Color(0xFF958D77), onPrimary: Color(0xFFFCF6E6), secondary: Color(0xFF809671), onSecondary: Color(0xFFFCF6E6), error: Color(0xFFFF6961), onError: Color(0xFFFFFAFA), background: Color(0xFFFCF6E6), onBackground: Color(0xFF958D77), surface: Color(0xFFFCF6E6), onSurface: Color(0xFF958D77));
+  const colorScheme = ColorScheme(
+      brightness: Brightness.light,
+      surfaceTint: Colors.transparent,
+      primary: Color(0xFF958D77),
+      onPrimary: Color(0xFFFCF6E6),
+      secondary: Color(0xFF809671),
+      onSecondary: Color(0xFFFCF6E6),
+      error: Color(0xFFFF6961),
+      onError: Color(0xFFFFFAFA),
+      background: Color(0xFFFCF6E6),
+      onBackground: Color(0xFF958D77),
+      surface: Color(0xFFFCF6E6),
+      onSurface: Color(0xFF958D77),
+      tertiary: Color(0xFFF9EBC7));
+  var baseIconTheme = IconThemeData(
+    color: colorScheme.primary,
+    shadows: <Shadow>[
+      Shadow(
+          color: Color(0xFF403D34).withOpacity(.5),
+          blurRadius: 1.5,
+          offset: Offset(0, 1))
+    ],
+  );
 
   return baseTheme.copyWith(
-    textTheme: GoogleFonts.ptSerifTextTheme(baseTheme.textTheme).copyWith(
-      titleSmall: GoogleFonts.ptSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: 0.1)),
-      bodyLarge: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.bodyLarge),
-      bodyMedium: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.bodyMedium),
-      bodySmall: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.bodySmall),
-      labelLarge: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelLarge),
-      labelMedium: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelMedium),
-      labelSmall: GoogleFonts.ptSans(textStyle: baseTheme.textTheme.labelSmall),
-    ).apply(bodyColor: colorScheme.primary, displayColor: colorScheme.primary),
+    textTheme: GoogleFonts.ptSerifTextTheme(baseTheme.textTheme)
+        .copyWith(
+          headlineSmall:
+              GoogleFonts.ptSerif(fontSize: 23, fontWeight: FontWeight.w500),
+          titleSmall: GoogleFonts.arimo(
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.1)),
+          bodyLarge: GoogleFonts.arimo(
+              textStyle: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.5)),
+          bodyMedium: GoogleFonts.arimo(
+              textStyle: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.4)),
+          bodySmall: GoogleFonts.arimo(
+              textStyle: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.4)),
+          labelLarge:
+              GoogleFonts.arimo(textStyle: baseTheme.textTheme.labelLarge),
+          labelMedium:
+              GoogleFonts.arimo(textStyle: baseTheme.textTheme.labelMedium),
+          labelSmall:
+              GoogleFonts.arimo(textStyle: baseTheme.textTheme.labelSmall),
+        )
+        .apply(
+            bodyColor: colorScheme.primary, displayColor: colorScheme.primary),
     scaffoldBackgroundColor: const Color(0xFFFCF6E6),
     colorScheme: colorScheme,
-    iconTheme: IconThemeData(color: colorScheme.primary)
-    );
+    iconTheme: baseIconTheme,
+    tabBarTheme: TabBarTheme(
+        overlayColor: MaterialStateProperty.all(Colors.transparent)),
+    navigationBarTheme: NavigationBarThemeData(
+        height: 38,
+        indicatorColor: colorScheme.background,
+        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        iconTheme: MaterialStateProperty.all(baseIconTheme.copyWith(size: 32))),
+  );
 }
