@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/sample_feature/post.dart';
 
 const BorderRadius imageBorderRadius = BorderRadius.all(Radius.circular(15));
@@ -24,9 +25,15 @@ class PostTile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.tertiary,
                     borderRadius: BorderRadius.circular(30)),
-                child: Center(child: ImageIcon(AssetImage('assets/images/green_dutch_oven.png'), size: 28, color: Theme.of(context).colorScheme.secondary,)),
+                child: Center(
+                    child: ImageIcon(
+                  AssetImage('assets/images/green_dutch_oven.png'),
+                  size: 28,
+                  color: Theme.of(context).colorScheme.secondary,
+                )),
               ),
-              Text(' ${post.account}', style: Theme.of(context).textTheme.bodyLarge),
+              Text(' ${post.account}',
+                  style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
           Padding(
@@ -35,10 +42,15 @@ class PostTile extends StatelessWidget {
               elevation: 4,
               borderRadius: imageBorderRadius,
               child: Container(
+                height: 450,
+                width: MediaQuery.sizeOf(context).width,
                 clipBehavior: Clip.hardEdge,
                 decoration:
                     const BoxDecoration(borderRadius: imageBorderRadius),
-                child: Image.asset('assets/images/honey_harissa.jpeg'),
+                child: Image.asset(
+                  'assets/images/honey_harissa.jpeg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -50,25 +62,25 @@ class PostTile extends StatelessWidget {
               child: Row(
             children: [
               Text(post.time!.toString()),
-              SizedBox(
+              const SizedBox(
                 width: 2,
               ),
-              Icon(
-                Icons.schedule_rounded,
-                size: 20,
+              const FaIcon(
+                FontAwesomeIcons.clock,
+                size: 15,
               ),
-              VerticalDivider(
+              const VerticalDivider(
                 indent: 3,
                 endIndent: 3,
                 thickness: 1.5,
               ),
               Text(post.servings!),
-              SizedBox(
+              const SizedBox(
                 width: 2,
               ),
-              Icon(
-                Icons.people_rounded,
-                size: 20,
+              const FaIcon(
+                FontAwesomeIcons.userGroup,
+                size: 15,
               ),
             ],
           )),
@@ -80,7 +92,7 @@ class PostTile extends StatelessWidget {
                   if (item.isEven) {
                     return Text(post.tags![item ~/ 2]);
                   }
-                  return VerticalDivider(
+                  return const VerticalDivider(
                     indent: 3,
                     endIndent: 3,
                     thickness: 1.5,
@@ -88,19 +100,19 @@ class PostTile extends StatelessWidget {
                 }),
               ]),
             ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 2),
             child: Row(
               children: [
-                Icon(Icons.favorite_border_rounded),
+                FaIcon(FontAwesomeIcons.heart),
                 SizedBox(
-                  width: 2,
+                  width: 6,
                 ),
-                Icon(Icons.send_rounded),
+                FaIcon(FontAwesomeIcons.paperPlane),
                 SizedBox(
-                  width: 2,
+                  width: 6,
                 ),
-                Icon(Icons.chat_bubble_outline_rounded),
+                FaIcon(FontAwesomeIcons.comment),
               ],
             ),
           ),

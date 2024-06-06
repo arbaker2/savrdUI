@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //final textTheme = Theme.of(context).textTheme;
 
-    //TODO: should this be defined in another block?
     // Configure Text theme
     //   final TextTheme textTheme = TextTheme(
     //   displayLarge: GoogleFonts.ptSerif(
@@ -62,6 +61,9 @@ class MyApp extends StatelessWidget {
           // returns to the app after it has been killed while running in the
           // background.
           restorationScopeId: 'app',
+
+          // remove debug banner
+          debugShowCheckedModeBanner: false,
 
           // Provide the generated AppLocalizations to the MaterialApp. This
           // allows descendant Widgets to display the correct translations
@@ -132,8 +134,10 @@ ThemeData _buildTheme() {
       surface: Color(0xFFFCF6E6),
       onSurface: Color(0xFF958D77),
       tertiary: Color(0xFFF9EBC7));
+
   var baseIconTheme = IconThemeData(
     color: colorScheme.primary,
+    //weight: 900,
     shadows: <Shadow>[
       Shadow(
           color: Color(0xFF403D34).withOpacity(.5),
@@ -141,6 +145,17 @@ ThemeData _buildTheme() {
           offset: Offset(0, 1))
     ],
   );
+
+  IconThemeData getIconTheme(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.selected
+    };
+    if (states.any(interactiveStates.contains)) {
+      return baseIconTheme.copyWith(size: 32);
+    }
+    return baseIconTheme.copyWith(size: 32);
+  }
 
   return baseTheme.copyWith(
     textTheme: GoogleFonts.ptSerifTextTheme(baseTheme.textTheme)
@@ -183,8 +198,10 @@ ThemeData _buildTheme() {
         overlayColor: MaterialStateProperty.all(Colors.transparent)),
     navigationBarTheme: NavigationBarThemeData(
         height: 38,
+        elevation: 4,
+        shadowColor: colorScheme.primary,
         indicatorColor: colorScheme.background,
         overlayColor: MaterialStateProperty.all(Colors.transparent),
-        iconTheme: MaterialStateProperty.all(baseIconTheme.copyWith(size: 32))),
+        iconTheme: MaterialStateProperty.resolveWith(getIconTheme)),
   );
 }
