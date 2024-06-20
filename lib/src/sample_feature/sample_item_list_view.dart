@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/sample_feature/post_tile.dart';
-import 'package:savrd/custom_nav_bar.dart';
 
 import '../settings/settings_view.dart';
 import 'post.dart';
@@ -16,11 +14,11 @@ class SampleItemListView extends StatefulWidget {
       Post(
           id: 1,
           imageAssetLocation: 'location',
-          title: 'Honey Harrisa Salmon',
+          title: 'Chocolate Banana Bread',
           time: 30,
-          servings: '4',
+          servings: '4-6',
           account: 'Savrd Food',
-          tags: ['Easy Dinner', 'GF', 'Seafood']),
+          tags: ['Dessert', 'GF', 'Paleo']),
       Post(
           id: 2,
           imageAssetLocation: 'location',

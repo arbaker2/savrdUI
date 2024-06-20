@@ -48,7 +48,7 @@ class PostTile extends StatelessWidget {
                 decoration:
                     const BoxDecoration(borderRadius: imageBorderRadius),
                 child: Image.asset(
-                  'assets/images/honey_harissa.jpeg',
+                  'assets/images/banana_bread.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
