@@ -6,6 +6,7 @@ import 'package:savrd/src/profile/profile_view.dart';
 import 'package:savrd/src/profile/user_icon.dart';
 import 'package:savrd/src/sample_feature/post.dart';
 
+import '../profile/profile.dart';
 import 'image_tile.dart';
 
 class PostTile extends StatelessWidget {
@@ -21,8 +22,18 @@ class PostTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () =>
-                Navigator.restorablePushNamed(context, ProfileView.routeName),
+            onTap: () => Navigator.pushNamed(
+              context,
+              ProfileView.routeName,
+              arguments: ProfileViewArguments(
+                profile: const Profile(
+                  id: 1,
+                  imageAssetLocation: 'assets/images/green_dutch_oven.png',
+                  handle: 'Savrd food',
+                  name: 'SAVRD',
+                ),
+              ),
+            ),
             child: Row(
               children: [
                 const UserIcon(

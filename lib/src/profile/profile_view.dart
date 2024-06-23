@@ -3,11 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/profile/user_icon.dart';
 import 'package:savrd/src/sample_feature/image_tile.dart';
 
+import 'profile.dart';
+
 //FIXME: accept a profile when building this page
 //FIXME: make entire page scrollable
 //FIXME: when scrolling make app bar disappear
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  const ProfileView({super.key, required this.profile});
+
+  final Profile profile;
 
   static const routeName = '/profile';
 
@@ -24,7 +28,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'SAVRD Foods',
+          profile.handle,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         actions: [
@@ -198,4 +202,10 @@ class StatLabel extends StatelessWidget {
       ),
     );
   }
+}
+
+class ProfileViewArguments {
+  final Profile profile;
+
+  ProfileViewArguments({required this.profile});
 }
