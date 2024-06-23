@@ -20,6 +20,7 @@ class ProfileView extends StatelessWidget {
   static const double gridSpacing = 8;
   static const double gridAspect = .75;
   static const double spacing = 14;
+  static const double iconSize = 36;
 
   @override
   Widget build(BuildContext context) {
@@ -149,15 +150,15 @@ class ProfileView extends StatelessWidget {
                       children: [
                         FaIcon(
                           FontAwesomeIcons.book,
-                          size: 36,
+                          size: iconSize,
                         ),
                         FaIcon(
                           FontAwesomeIcons.spoon,
-                          size: 36,
+                          size: iconSize,
                         ),
                         FaIcon(
                           FontAwesomeIcons.tag,
-                          size: 36,
+                          size: iconSize,
                         ),
                       ],
                     ),
@@ -172,9 +173,24 @@ class ProfileView extends StatelessWidget {
                   crossAxisSpacing: gridSpacing,
                   childAspectRatio: gridAspect),
               delegate: SliverChildBuilderDelegate((context, index) {
-                return const ImageTile(
-                  'assets/images/banana_bread.jpg',
-                );
+                int remainder = index % 4;
+                if (remainder == 0) {
+                  return const ImageTile(
+                    'assets/images/banana_bread.jpg',
+                  );
+                } else if (remainder == 1) {
+                  return const ImageTile(
+                    'assets/images/banana_pancakes.jpg',
+                  );
+                } else if (remainder == 2) {
+                  return const ImageTile(
+                    'assets/images/honey_harissa.jpeg',
+                  );
+                } else {
+                  return const ImageTile(
+                    'assets/images/jambalya.jpg',
+                  );
+                }
               }),
             ),
           ],
