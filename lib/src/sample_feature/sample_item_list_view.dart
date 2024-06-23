@@ -17,7 +17,7 @@ class SampleItemListView extends StatefulWidget {
           title: 'Chocolate Banana Bread',
           time: 30,
           servings: '4-6',
-          account: 'Savrd Food',
+          profile: 'Savrd Food',
           tags: ['Dessert', 'GF', 'Paleo']),
       Post(
           id: 2,
@@ -25,14 +25,14 @@ class SampleItemListView extends StatefulWidget {
           time: 30,
           servings: '4',
           title: 'post2',
-          account: 'account 2'),
+          profile: 'account 2'),
       Post(
           id: 3,
           imageAssetLocation: 'location',
           time: 30,
           servings: '4',
           title: 'post3',
-          account: 'account 3')
+          profile: 'account 3')
     ],
   });
 
@@ -125,22 +125,6 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                     final item = widget.items[index];
 
                     return PostTile(post: item);
-                    // ListTile(
-                    //   title: Text('Item ${item.id}'),
-                    //   leading: const CircleAvatar(
-                    //     // Display the Flutter Logo image asset.
-                    //     foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-                    //   ),
-                    //   onTap: () {
-                    //     // Navigate to the details page. If the user leaves and returns to
-                    //     // the app after it has been killed while running in the
-                    //     // background, the navigation stack is restored.
-                    //     Navigator.restorablePushNamed(
-                    //       context,
-                    //       SampleItemDetailsView.routeName,
-                    //     );
-                    //   }
-                    // );
                   },
                 ),
               ],

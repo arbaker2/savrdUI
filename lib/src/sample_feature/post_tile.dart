@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:savrd/src/profile/profile_view.dart';
+import 'package:savrd/src/profile/user_icon.dart';
 import 'package:savrd/src/sample_feature/post.dart';
 
-const BorderRadius imageBorderRadius = BorderRadius.all(Radius.circular(15));
+import 'image_tile.dart';
 
 class PostTile extends StatelessWidget {
   const PostTile({super.key, required this.post});
@@ -17,41 +20,23 @@ class PostTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 35,
-                height: 35,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.tertiary,
-                    borderRadius: BorderRadius.circular(30)),
-                child: Center(
-                    child: ImageIcon(
-                  AssetImage('assets/images/green_dutch_oven.png'),
-                  size: 28,
-                  color: Theme.of(context).colorScheme.secondary,
-                )),
-              ),
-              Text(' ${post.account}',
-                  style: Theme.of(context).textTheme.bodyLarge),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Material(
-              elevation: 4,
-              borderRadius: imageBorderRadius,
-              child: Container(
-                height: 450,
-                width: MediaQuery.sizeOf(context).width,
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    const BoxDecoration(borderRadius: imageBorderRadius),
-                child: Image.asset(
-                  'assets/images/banana_bread.jpg',
-                  fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () =>
+                Navigator.restorablePushNamed(context, ProfileView.routeName),
+            child: Row(
+              children: [
+                const UserIcon(
+                  imageLocation: 'assets/images/green_dutch_oven.png',
                 ),
-              ),
+                Text(' ${post.profile}',
+                    style: Theme.of(context).textTheme.bodyLarge),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: ImageTile(
+              'assets/images/banana_bread.jpg',
             ),
           ),
           Text(
