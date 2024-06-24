@@ -8,18 +8,18 @@ import 'post.dart';
 double _tabHeight = 30;
 
 /// Displays a list of SampleItems.
-class SampleItemListView extends StatefulWidget {
-  const SampleItemListView({
+class PostFeedView extends StatefulWidget {
+  const PostFeedView({
     super.key,
   });
 
   static const routeName = '/';
 
   @override
-  State<SampleItemListView> createState() => _SampleItemListViewState();
+  State<PostFeedView> createState() => _PostFeedViewState();
 }
 
-class _SampleItemListViewState extends State<SampleItemListView> {
+class _PostFeedViewState extends State<PostFeedView> {
   int currentPageIndex = 0;
 
   final List<Post> items = [
