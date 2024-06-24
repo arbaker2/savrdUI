@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:savrd/src/sample_feature/post_tile.dart';
 
+import '../profile/profile.dart';
 import '../settings/settings_view.dart';
 import 'post.dart';
 
@@ -17,22 +18,39 @@ class SampleItemListView extends StatefulWidget {
           title: 'Chocolate Banana Bread',
           time: 30,
           servings: '4-6',
-          profile: 'Savrd Food',
+          profile: Profile(
+            id: 1,
+            imageAssetLocation: 'assets/images/green_dutch_oven.png',
+            handle: 'Savrd food',
+            name: 'SAVRD',
+          ),
           tags: ['Dessert', 'GF', 'Paleo']),
       Post(
-          id: 2,
-          imageAssetLocation: 'location',
-          time: 30,
-          servings: '4',
-          title: 'post2',
-          profile: 'account 2'),
+        id: 2,
+        imageAssetLocation: 'location',
+        time: 30,
+        servings: '4',
+        title: 'post2',
+        profile: Profile(
+          id: 1,
+          imageAssetLocation: 'assets/images/green_dutch_oven.png',
+          handle: 'proflie2',
+          name: 'SAVRD',
+        ),
+      ),
       Post(
-          id: 3,
-          imageAssetLocation: 'location',
-          time: 30,
-          servings: '4',
-          title: 'post3',
-          profile: 'account 3')
+        id: 3,
+        imageAssetLocation: 'location',
+        time: 30,
+        servings: '4',
+        title: 'post3',
+        profile: Profile(
+          id: 1,
+          imageAssetLocation: 'assets/images/green_dutch_oven.png',
+          handle: 'Profile3',
+          name: 'SAVRD',
+        ),
+      )
     ],
   });
 

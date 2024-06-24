@@ -1,3 +1,5 @@
+import '../profile/profile.dart';
+
 /// A placeholder class that represents an entity or model.
 class Post {
   const Post(
@@ -13,8 +15,7 @@ class Post {
   final int id;
   final String imageAssetLocation;
   final String title;
-  //TODO: give account its own class
-  final String profile;
+  final Profile profile;
   final int? time;
   final String? servings;
   final String? description;

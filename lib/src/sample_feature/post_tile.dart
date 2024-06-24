@@ -39,7 +39,7 @@ class PostTile extends StatelessWidget {
                 const UserIcon(
                   imageLocation: 'assets/images/green_dutch_oven.png',
                 ),
-                Text(' ${post.profile}',
+                Text(' ${post.profile.handle}',
                     style: Theme.of(context).textTheme.bodyLarge),
               ],
             ),
