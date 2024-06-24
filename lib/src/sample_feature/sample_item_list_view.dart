@@ -55,21 +55,16 @@ class _SampleItemListViewState extends State<SampleItemListView> {
       tags: ['Dessert', 'GF', 'Paleo'],
       directions: ['test'],
     ),
-    RecipePost(
+    const Post(
       id: 3,
       imageAssetLocation: 'location',
-      time: 30,
-      servings: '4',
       title: 'post3',
-      description: 'Delicious banana bread',
-      profile: const Profile(
+      profile: Profile(
         id: 1,
         imageAssetLocation: 'assets/images/green_dutch_oven.png',
         handle: 'Profile3',
         name: 'SAVRD',
       ),
-      tags: ['Dessert', 'GF', 'Paleo'],
-      directions: ['test2'],
     ),
   ];
 
@@ -150,9 +145,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                   itemBuilder: (BuildContext context, int index) {
                     final item = items[index];
 
-                    //FIXME: make post tile accept post items and render things according to the type
-                    //TODO: set up getters for some widgets on the post class
-                    return PostTile(post: item as RecipePost);
+                    return PostTile(post: item);
                   },
                 ),
               ],

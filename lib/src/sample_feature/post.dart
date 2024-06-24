@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../profile/profile.dart';
 
 /// A placeholder class that represents an entity or model.

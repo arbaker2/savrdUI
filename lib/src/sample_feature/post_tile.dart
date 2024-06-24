@@ -10,12 +10,19 @@ import '../profile/profile.dart';
 import 'image_tile.dart';
 
 class PostTile extends StatelessWidget {
-  const PostTile({super.key, required this.post});
+  const PostTile({super.key, required this.post})
+      : isRecipe = post is RecipePost;
 
-  final RecipePost post;
+  final Post post;
+  final bool isRecipe;
 
   @override
   Widget build(BuildContext context) {
+    //FIXME: better way to upgrade?
+    RecipePost? upgradePost;
+    if (isRecipe) {
+      upgradePost = post as RecipePost;
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -54,39 +61,40 @@ class PostTile extends StatelessWidget {
             post.title,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
-          IntrinsicHeight(
-              child: Row(
-            children: [
-              Text(post.time!.toString()),
-              const SizedBox(
-                width: 2,
-              ),
-              const FaIcon(
-                FontAwesomeIcons.clock,
-                size: 15,
-              ),
-              const VerticalDivider(
-                indent: 3,
-                endIndent: 3,
-                thickness: 1.5,
-              ),
-              Text(post.servings!),
-              const SizedBox(
-                width: 2,
-              ),
-              const FaIcon(
-                FontAwesomeIcons.userGroup,
-                size: 15,
-              ),
-            ],
-          )),
+          if (isRecipe)
+            IntrinsicHeight(
+                child: Row(
+              children: [
+                Text(upgradePost!.time.toString()),
+                const SizedBox(
+                  width: 2,
+                ),
+                const FaIcon(
+                  FontAwesomeIcons.clock,
+                  size: 15,
+                ),
+                const VerticalDivider(
+                  indent: 3,
+                  endIndent: 3,
+                  thickness: 1.5,
+                ),
+                Text(upgradePost.servings),
+                const SizedBox(
+                  width: 2,
+                ),
+                const FaIcon(
+                  FontAwesomeIcons.userGroup,
+                  size: 15,
+                ),
+              ],
+            )),
           // generate tag widgets from list of strings
-          if (post.tags != null)
+          if (isRecipe)
             IntrinsicHeight(
               child: Row(children: [
-                ...List.generate(post.tags!.length * 2 - 1, (item) {
+                ...List.generate(upgradePost!.tags.length * 2 - 1, (item) {
                   if (item.isEven) {
-                    return Text(post.tags![item ~/ 2]);
+                    return Text(upgradePost!.tags[item ~/ 2]);
                   }
                   return const VerticalDivider(
                     indent: 3,
