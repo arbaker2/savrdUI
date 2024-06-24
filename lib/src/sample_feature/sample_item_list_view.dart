@@ -12,51 +12,57 @@ class SampleItemListView extends StatefulWidget {
   const SampleItemListView({
     super.key,
     this.items = const [
-      Post(
+      RecipePost(
+        id: 1,
+        imageAssetLocation: 'location',
+        title: 'Chocolate Banana Bread',
+        time: 30,
+        description: 'Delicious banana bread',
+        servings: '4-6',
+        profile: Profile(
           id: 1,
-          imageAssetLocation: 'location',
-          title: 'Chocolate Banana Bread',
-          time: 30,
-          servings: '4-6',
-          profile: Profile(
-            id: 1,
-            imageAssetLocation: 'assets/images/green_dutch_oven.png',
-            handle: 'Savrd food',
-            name: 'SAVRD',
-          ),
-          tags: ['Dessert', 'GF', 'Paleo']),
-      Post(
+          imageAssetLocation: 'assets/images/green_dutch_oven.png',
+          handle: 'Savrd food',
+          name: 'SAVRD',
+        ),
+        tags: ['Dessert', 'GF', 'Paleo'],
+      ),
+      RecipePost(
         id: 2,
         imageAssetLocation: 'location',
         time: 30,
         servings: '4',
         title: 'post2',
+        description: 'Delicious banana bread',
         profile: Profile(
           id: 1,
           imageAssetLocation: 'assets/images/green_dutch_oven.png',
           handle: 'proflie2',
           name: 'SAVRD',
         ),
+        tags: ['Dessert', 'GF', 'Paleo'],
       ),
-      Post(
+      RecipePost(
         id: 3,
         imageAssetLocation: 'location',
         time: 30,
         servings: '4',
         title: 'post3',
+        description: 'Delicious banana bread',
         profile: Profile(
           id: 1,
           imageAssetLocation: 'assets/images/green_dutch_oven.png',
           handle: 'Profile3',
           name: 'SAVRD',
         ),
-      )
+        tags: ['Dessert', 'GF', 'Paleo'],
+      ),
     ],
   });
 
   static const routeName = '/';
 
-  final List<Post> items;
+  final List<RecipePost> items;
 
   @override
   State<SampleItemListView> createState() => _SampleItemListViewState();
