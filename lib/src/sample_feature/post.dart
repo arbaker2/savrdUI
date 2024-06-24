@@ -23,8 +23,13 @@ class RecipePost extends Post {
   final String servings;
   final String description;
   final List<String> tags;
+  //TODO: creat direction class
+  final List<String> directions;
+  //TODO: change this datatype for rich text
+  final String? blog;
+  final String? notes;
 
-  const RecipePost({
+  RecipePost({
     required super.id,
     required super.imageAssetLocation,
     required super.title,
@@ -33,5 +38,8 @@ class RecipePost extends Post {
     required this.servings,
     required this.description,
     required this.tags,
-  });
+    required this.directions,
+    this.blog,
+    this.notes,
+  }) : assert(directions.isNotEmpty);
 }

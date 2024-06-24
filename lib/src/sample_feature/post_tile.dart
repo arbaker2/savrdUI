@@ -12,7 +12,7 @@ import 'image_tile.dart';
 class PostTile extends StatelessWidget {
   const PostTile({super.key, required this.post});
 
-  final Post post;
+  final RecipePost post;
 
   @override
   Widget build(BuildContext context) {

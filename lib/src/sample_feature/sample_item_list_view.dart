@@ -11,58 +11,9 @@ double _tabHeight = 30;
 class SampleItemListView extends StatefulWidget {
   const SampleItemListView({
     super.key,
-    this.items = const [
-      RecipePost(
-        id: 1,
-        imageAssetLocation: 'location',
-        title: 'Chocolate Banana Bread',
-        time: 30,
-        description: 'Delicious banana bread',
-        servings: '4-6',
-        profile: Profile(
-          id: 1,
-          imageAssetLocation: 'assets/images/green_dutch_oven.png',
-          handle: 'Savrd food',
-          name: 'SAVRD',
-        ),
-        tags: ['Dessert', 'GF', 'Paleo'],
-      ),
-      RecipePost(
-        id: 2,
-        imageAssetLocation: 'location',
-        time: 30,
-        servings: '4',
-        title: 'post2',
-        description: 'Delicious banana bread',
-        profile: Profile(
-          id: 1,
-          imageAssetLocation: 'assets/images/green_dutch_oven.png',
-          handle: 'proflie2',
-          name: 'SAVRD',
-        ),
-        tags: ['Dessert', 'GF', 'Paleo'],
-      ),
-      RecipePost(
-        id: 3,
-        imageAssetLocation: 'location',
-        time: 30,
-        servings: '4',
-        title: 'post3',
-        description: 'Delicious banana bread',
-        profile: Profile(
-          id: 1,
-          imageAssetLocation: 'assets/images/green_dutch_oven.png',
-          handle: 'Profile3',
-          name: 'SAVRD',
-        ),
-        tags: ['Dessert', 'GF', 'Paleo'],
-      ),
-    ],
   });
 
   static const routeName = '/';
-
-  final List<RecipePost> items;
 
   @override
   State<SampleItemListView> createState() => _SampleItemListViewState();
@@ -71,12 +22,63 @@ class SampleItemListView extends StatefulWidget {
 class _SampleItemListViewState extends State<SampleItemListView> {
   int currentPageIndex = 0;
 
+  final List<Post> items = [
+    RecipePost(
+      id: 1,
+      imageAssetLocation: 'location',
+      title: 'Chocolate Banana Bread',
+      time: 30,
+      description: 'Delicious banana bread',
+      servings: '4-6',
+      profile: const Profile(
+        id: 1,
+        imageAssetLocation: 'assets/images/green_dutch_oven.png',
+        handle: 'Savrd food',
+        name: 'SAVRD',
+      ),
+      tags: ['Dessert', 'GF', 'Paleo'],
+      directions: ['eat food'],
+    ),
+    RecipePost(
+      id: 2,
+      imageAssetLocation: 'location',
+      time: 30,
+      servings: '4',
+      title: 'post2',
+      description: 'Delicious banana bread',
+      profile: const Profile(
+        id: 1,
+        imageAssetLocation: 'assets/images/green_dutch_oven.png',
+        handle: 'proflie2',
+        name: 'SAVRD',
+      ),
+      tags: ['Dessert', 'GF', 'Paleo'],
+      directions: ['test'],
+    ),
+    RecipePost(
+      id: 3,
+      imageAssetLocation: 'location',
+      time: 30,
+      servings: '4',
+      title: 'post3',
+      description: 'Delicious banana bread',
+      profile: const Profile(
+        id: 1,
+        imageAssetLocation: 'assets/images/green_dutch_oven.png',
+        handle: 'Profile3',
+        name: 'SAVRD',
+      ),
+      tags: ['Dessert', 'GF', 'Paleo'],
+      directions: ['test2'],
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
-      animationDuration: Duration(milliseconds: 600),
+      animationDuration: const Duration(milliseconds: 600),
       child: Scaffold(
         // To work with lists that may contain a large number of items, it’s best
         // to use the ListView.builder constructor.
@@ -97,7 +99,7 @@ class _SampleItemListViewState extends State<SampleItemListView> {
                   snap: true,
                   forceElevated: innerBoxIsScrolled,
                   title: ImageIcon(
-                    AssetImage('assets/images/green_dutch_oven.png'),
+                    const AssetImage('assets/images/green_dutch_oven.png'),
                     size: 55,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
@@ -137,18 +139,20 @@ class _SampleItemListViewState extends State<SampleItemListView> {
             },
             body: TabBarView(
               children: <Widget>[
-                Text("It's cloudy here"),
+                const Text("It's cloudy here"),
                 ListView.builder(
                   // Providing a restorationId allows the ListView to restore the
                   // scroll position when a user leaves and returns to the app after it
                   // has been killed while running in the background.
                   restorationId: 'sampleItemListView',
                   padding: EdgeInsets.zero,
-                  itemCount: widget.items.length,
+                  itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final item = widget.items[index];
+                    final item = items[index];
 
-                    return PostTile(post: item);
+                    //FIXME: make post tile accept post items and render things according to the type
+                    //TODO: set up getters for some widgets on the post class
+                    return PostTile(post: item as RecipePost);
                   },
                 ),
               ],
