@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/profile/user_icon.dart';
-import 'package:savrd/src/sample_feature/image_tile.dart';
+import 'package:savrd/src/post/image_tile.dart';
 
+import '../post/post_view.dart';
 import 'profile.dart';
 
 class ProfileView extends StatelessWidget {
@@ -38,7 +38,11 @@ class ProfileView extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.ellipsis),
+                  icon: IconButton(
+                    icon: const FaIcon(FontAwesomeIcons.ellipsis),
+                    onPressed: () => Navigator.restorablePushNamed(
+                        context, PostView.routeName),
+                  ),
                   onPressed: () {},
                 ),
               ],

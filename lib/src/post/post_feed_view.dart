@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:savrd/src/sample_feature/post_tile.dart';
+import 'package:savrd/src/post/post_app_bar.dart';
+import 'package:savrd/src/post/post_tile.dart';
 
 import '../profile/profile.dart';
 import '../settings/settings_view.dart';
@@ -13,7 +14,7 @@ class PostFeedView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/';
+  static const routeName = '/postFeed';
 
   @override
   State<PostFeedView> createState() => _PostFeedViewState();
@@ -83,55 +84,39 @@ class _PostFeedViewState extends State<PostFeedView> {
         // builds Widgets as they’re scrolled into view.
         body: SafeArea(
           child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  toolbarHeight: 45,
-                  //TODO: can these be removed handled in body?
-                  floating: true,
-                  expandedHeight: 0,
-                  snap: true,
-                  forceElevated: innerBoxIsScrolled,
-                  title: ImageIcon(
-                    const AssetImage('assets/images/green_dutch_oven.png'),
-                    size: 55,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {
-                        // Navigate to the settings page. If the user leaves and returns
-                        // to the app after it has been killed while running in the
-                        // background, the navigation stack is restored.
-                        Navigator.restorablePushNamed(
-                            context, SettingsView.routeName);
-                      },
-                    ),
-                  ],
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(_tabHeight),
-                    child: SizedBox(
-                      height: _tabHeight,
-                      child: const TabBar(
-                        dividerHeight: 0,
-                        tabs: <Widget>[
-                          Tab(
-                            text: 'discover',
-                            //height: 10,
-                          ),
-                          Tab(
-                            text: 'following',
-                            //height: 10,
-                          ),
-                        ],
+            headerSliverBuilder: buildHeaderSliverBuilder(
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  onPressed: () {
+                    // Navigate to the settings page. If the user leaves and returns
+                    // to the app after it has been killed while running in the
+                    // background, the navigation stack is restored.
+                    Navigator.restorablePushNamed(
+                        context, SettingsView.routeName);
+                  },
+                ),
+              ],
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(_tabHeight),
+                child: SizedBox(
+                  height: _tabHeight,
+                  child: const TabBar(
+                    dividerHeight: 0,
+                    tabs: <Widget>[
+                      Tab(
+                        text: 'discover',
+                        //height: 10,
                       ),
-                    ),
+                      Tab(
+                        text: 'following',
+                        //height: 10,
+                      ),
+                    ],
                   ),
                 ),
-              ];
-            },
+              ),
+            ),
             body: TabBarView(
               children: <Widget>[
                 const Text("It's cloudy here"),
@@ -139,7 +124,7 @@ class _PostFeedViewState extends State<PostFeedView> {
                   // Providing a restorationId allows the ListView to restore the
                   // scroll position when a user leaves and returns to the app after it
                   // has been killed while running in the background.
-                  restorationId: 'sampleItemListView',
+                  restorationId: 'postFeedView',
                   padding: EdgeInsets.zero,
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {

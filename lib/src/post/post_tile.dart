@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/profile/profile_view.dart';
 import 'package:savrd/src/profile/user_icon.dart';
-import 'package:savrd/src/sample_feature/post.dart';
+import 'package:savrd/src/post/post.dart';
 
 import '../profile/profile.dart';
 import 'image_tile.dart';

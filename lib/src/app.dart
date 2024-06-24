@@ -4,7 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:savrd/src/profile/profile_view.dart';
 
-import 'sample_feature/post_feed.dart';
+import 'post/post_feed_view.dart';
+import 'post/post_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -109,7 +110,10 @@ class MyApp extends StatelessWidget {
                     final args =
                         routeSettings.arguments as ProfileViewArguments;
                     return ProfileView(profile: args.profile);
+                  case PostView.routeName:
+                    return const PostView();
                   case PostFeedView.routeName:
+                    return const PostFeedView();
                   default:
                     return const PostFeedView();
                 }
