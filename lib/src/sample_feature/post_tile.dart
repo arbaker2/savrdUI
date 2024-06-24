@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/profile/profile_view.dart';
 import 'package:savrd/src/profile/user_icon.dart';
@@ -10,19 +8,14 @@ import '../profile/profile.dart';
 import 'image_tile.dart';
 
 class PostTile extends StatelessWidget {
-  const PostTile({super.key, required this.post})
-      : isRecipe = post is RecipePost;
+  const PostTile({super.key, required this.post});
 
   final Post post;
-  final bool isRecipe;
 
   @override
   Widget build(BuildContext context) {
-    //FIXME: better way to upgrade?
-    RecipePost? upgradePost;
-    if (isRecipe) {
-      upgradePost = post as RecipePost;
-    }
+    Post postLocal = post;
+    bool isRecipe = postLocal is RecipePost;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -65,7 +58,7 @@ class PostTile extends StatelessWidget {
             IntrinsicHeight(
                 child: Row(
               children: [
-                Text(upgradePost!.time.toString()),
+                Text(postLocal.time.toString()),
                 const SizedBox(
                   width: 2,
                 ),
@@ -78,7 +71,7 @@ class PostTile extends StatelessWidget {
                   endIndent: 3,
                   thickness: 1.5,
                 ),
-                Text(upgradePost.servings),
+                Text(postLocal.servings),
                 const SizedBox(
                   width: 2,
                 ),
@@ -92,9 +85,9 @@ class PostTile extends StatelessWidget {
           if (isRecipe)
             IntrinsicHeight(
               child: Row(children: [
-                ...List.generate(upgradePost!.tags.length * 2 - 1, (item) {
+                ...List.generate(postLocal.tags.length * 2 - 1, (item) {
                   if (item.isEven) {
-                    return Text(upgradePost!.tags[item ~/ 2]);
+                    return Text(postLocal.tags[item ~/ 2]);
                   }
                   return const VerticalDivider(
                     indent: 3,
