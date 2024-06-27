@@ -1,4 +1,5 @@
 import '../profile/profile.dart';
+import 'ingredient.dart';
 
 /// A placeholder class that represents an entity or model.
 class Post {
@@ -27,9 +28,7 @@ class RecipePost extends Post {
   final String servings;
   final String description;
   final List<String> tags;
-  // TODO: create ingredient class
-  // need rich text for measurments
-  final List<String> ingredients;
+  final List<Ingredient> ingredients;
   // TODO: creat direction class
   final List<String> directions;
   final String? notes;

@@ -4,6 +4,7 @@ import 'package:savrd/src/post/post_tile.dart';
 
 import '../profile/profile.dart';
 import '../settings/settings_view.dart';
+import 'ingredient.dart';
 import 'post.dart';
 
 double _tabHeight = 30;
@@ -31,21 +32,21 @@ class _PostFeedViewState extends State<PostFeedView> {
       "With that, we want to start sharing some of our favorite recipes. Our first dish dates back many generations in our family,"
       " and we can’t wait for you to try it out! Cajun comfort food with just the right amount of kick. We hope you enjoy our take on jambalaya.";
 
-  static List<String> ingredients = [
-    "1 whole chicken",
-    "2 cups white rice",
-    "1/2 bell pepper (chopped)",
-    "1 onion (chopped)",
-    "1/4 bunch celery (chopped)",
-    "1 lb ground sausage",
-    "1/2 lb link sausage (andouille preferred)",
-    "3oz tomato paste",
-    "2 bay leaves",
-    "1/2 tsp pepper",
-    "1/2 tsp Tobasco",
-    "2 tbsp Cavender’s Greek Seasoning",
-    "2 cloves garlic (minced)",
-    "1/4 tsp red pepper flakes",
+  static List<Ingredient> ingredients = [
+    const Ingredient("1 whole chicken"),
+    const Ingredient("2 cups white rice"),
+    const Ingredient("1/2 bell pepper (chopped)"),
+    const Ingredient("1 onion (chopped)"),
+    const Ingredient("1/4 bunch celery (chopped)"),
+    const Ingredient("1 lb ground sausage"),
+    const Ingredient("1/2 lb link sausage (andouille preferred)"),
+    const Ingredient("3oz tomato paste"),
+    const Ingredient("2 bay leaves"),
+    const Ingredient("1/2 tsp pepper"),
+    const Ingredient("1/2 tsp Tobasco"),
+    const Ingredient("2 tbsp Cavender’s Greek Seasoning"),
+    const Ingredient("2 cloves garlic (minced)"),
+    const Ingredient("1/4 tsp red pepper flakes"),
   ];
 
   static List<String> directions = [

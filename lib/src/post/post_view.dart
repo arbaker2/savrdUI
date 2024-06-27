@@ -120,11 +120,21 @@ class PostView extends StatelessWidget {
                                         final ingredient =
                                             postLocal.ingredients[index];
 
-                                        return Text(
-                                          ingredient,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
+                                        return RichText(
+                                          text: TextSpan(
+                                            text: ingredient.amount,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                            children: [
+                                              TextSpan(
+                                                text: ingredient.item,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium,
+                                              )
+                                            ],
+                                          ),
                                         );
                                       },
                                       growable: false,
@@ -156,8 +166,7 @@ class PostView extends StatelessWidget {
                                         text: "${index + 1} ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyLarge
-                                            ?.apply(fontWeightDelta: 2),
+                                            .bodyLarge,
                                         children: [
                                           TextSpan(
                                             text: direction,
