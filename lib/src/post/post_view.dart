@@ -90,29 +90,22 @@ class PostView extends StatelessWidget {
                       ),
                     // FIXME: Refactor the two below widgets
                     if (isRecipe)
-                      Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Text(
-                            postLocal.description,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )),
+                      Text(
+                        postLocal.description,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                     // FIXME: group
                     if (isRecipe)
                       if (postLocal.blog != null)
                         Section(
-                          title: 'Blog',
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Text(
-                              postLocal.blog!,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
+                          child: Text(
+                            postLocal.blog!,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
 
                     if (isRecipe)
                       Section(
-                        title: "Ingredients",
                         child: ListView(
                           restorationId: 'ingredientView',
                           padding: EdgeInsets.zero,
@@ -139,7 +132,6 @@ class PostView extends StatelessWidget {
                       ),
                     if (isRecipe)
                       Section(
-                        title: "Directions",
                         child: ListView(
                           restorationId: 'directionsView',
                           padding: EdgeInsets.zero,
@@ -172,13 +164,9 @@ class PostView extends StatelessWidget {
                     if (isRecipe)
                       if (postLocal.notes != null)
                         Section(
-                          title: "Notes",
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Text(
-                              postLocal.notes!,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
+                          child: Text(
+                            postLocal.notes!,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                   ],
@@ -196,22 +184,25 @@ class Section extends StatelessWidget {
   const Section({
     super.key,
     required this.child,
-    required this.title,
   });
 
-  final String title;
   final Widget child;
+
+  static double indent = 60;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall?.apply(
-                decoration: TextDecoration.underline,
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Divider(
+            thickness: 1,
+            indent: indent,
+            endIndent: indent,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         child,
       ],
