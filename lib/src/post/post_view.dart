@@ -151,16 +151,22 @@ class PostView extends StatelessWidget {
 
                                 return Card(
                                   child: ListTile(
-                                    title: Text(
-                                      direction,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                    leading: Text(
-                                      (index + 1).toString(),
-                                      style:
-                                          Theme.of(context).textTheme.bodyLarge,
+                                    title: RichText(
+                                      text: TextSpan(
+                                        text: "${index + 1} ",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.apply(fontWeightDelta: 2),
+                                        children: [
+                                          TextSpan(
+                                            text: direction,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
