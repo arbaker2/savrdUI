@@ -106,28 +106,34 @@ class PostView extends StatelessWidget {
 
                     if (isRecipe)
                       Section(
-                        child: ListView(
-                          restorationId: 'ingredientView',
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          children: <Widget>[
-                            ...List.generate(
-                              postLocal.ingredients.length,
-                              (int index) {
-                                final ingredient = postLocal.ingredients[index];
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    ...List.generate(
+                                      postLocal.ingredients.length,
+                                      (int index) {
+                                        final ingredient =
+                                            postLocal.ingredients[index];
 
-                                return ListTile(
-                                  title: Text(
-                                    ingredient,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                );
-                              },
-                              growable: false,
+                                        return Text(
+                                          ingredient,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        );
+                                      },
+                                      growable: false,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     if (isRecipe)
@@ -143,16 +149,19 @@ class PostView extends StatelessWidget {
                               (int index) {
                                 final direction = postLocal.directions[index];
 
-                                return ListTile(
-                                  title: Text(
-                                    direction,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  leading: Text(
-                                    (index + 1).toString(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
+                                return Card(
+                                  child: ListTile(
+                                    title: Text(
+                                      direction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                    leading: Text(
+                                      (index + 1).toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
                                   ),
                                 );
                               },
