@@ -23,10 +23,49 @@ class PostFeedView extends StatefulWidget {
 class _PostFeedViewState extends State<PostFeedView> {
   int currentPageIndex = 0;
 
+  static String blog =
+      "At SAVRD we strive to make sharing, discovering, and cooking food seamless."
+      " We believe that food deserves its own app - a place curated just for cuisine,"
+      " built to beautifully showcase and discover culinary creations of all kinds."
+      " We aim to create a community that will learn, create, and get inspiration from one another.\n\n"
+      "With that, we want to start sharing some of our favorite recipes. Our first dish dates back many generations in our family,"
+      " and we can’t wait for you to try it out! Cajun comfort food with just the right amount of kick. We hope you enjoy our take on jambalaya.";
+
+  static List<String> ingredients = [
+    "1 whole chicken",
+    "2 cups white rice",
+    "1/2 bell pepper (chopped)",
+    "1 onion (chopped)",
+    "1/4 bunch celery (chopped)",
+    "1 lb ground sausage",
+    "1/2 lb link sausage (andouille preferred)",
+    "3oz tomato paste",
+    "2 bay leaves",
+    "1/2 tsp pepper",
+    "1/2 tsp Tobasco",
+    "2 tbsp Cavender’s Greek Seasoning",
+    "2 cloves garlic (minced)",
+    "1/4 tsp red pepper flakes",
+  ];
+
+  static List<String> directions = [
+    "Cook chicken on low in crock pot for 6-8 hours. When cooked, remove the meat and save the broth. Save half the meat for another dish, or double the recipe for a large gathering.",
+    "Preheat oven to 350 F",
+    "Add water to saved chicken broth to make 4 cups of liquid. Place rice and the broth/water mixture in a pot over high heat. Once boiling reduce heat to low and cover. Let cook for 25 minutes or when all liquid is absorbed.",
+    "While rice is cooking, heat a large skillet to medium-high heat. Add the ground sausage and linked sausage (chopped up) and brown. Once cooked set aside on a clean plate and add the chopped vegetables. Cook the vegetables until they are softened(3-4 minutes). After the vegetables are softened, add in the tomato paste, bay leaves, pepper, Tobasco, Greek Seasoning, garlic, red pepper flakes, and cooked sausage and cook until fragrant (1-2 minutes). Cover and reduce heat, let simmer for 20 minutes.",
+    "Grease a large 10x15 casserole dish (or two smaller ones) with your preferred cooking spray. In a large bowl combine chicken, cooked rice, and sausage mixture. Transfer to the casserole dish and cook covered at 350 F for 20-24 minutes. Jambalya should appear slightly golden when done.",
+  ];
+
+  static String note =
+      "This dish freezes very well. If you are looking to do some meal prep,"
+      " complete steps 1-4 and then transfer the mixture to a covered casserole dish and freeze."
+      " When re-heating transfer dish(s) to the refrigerator or counter to thaw, and then bake for normal cook time."
+      " The jambalaya can be frozen for several months if stored properly.";
+
   final List<Post> items = [
     RecipePost(
       id: 1,
-      imageAssetLocation: 'location',
+      imageAssetLocation: 'assets/images/banana_bread.jpg',
       title: 'Chocolate Banana Bread',
       time: 30,
       description: 'Delicious banana bread',
@@ -38,11 +77,34 @@ class _PostFeedViewState extends State<PostFeedView> {
         name: 'SAVRD',
       ),
       tags: ['Dessert', 'GF', 'Paleo'],
-      directions: ['eat food'],
+      directions: directions,
+      blog: blog,
+      ingredients: ingredients,
+      notes: note,
+    ),
+    RecipePost(
+      id: 1,
+      imageAssetLocation: 'assets/images/jambalaya.jpg',
+      title: 'Jambalaya',
+      time: 60,
+      description:
+          'A delcicious cajun casserole with chicken and andouille sausage sure to have your loved ones coming back for seconds!',
+      servings: '4-6',
+      profile: const Profile(
+        id: 1,
+        imageAssetLocation: 'assets/images/green_dutch_oven.png',
+        handle: 'Savrd food',
+        name: 'SAVRD',
+      ),
+      tags: ['Cajun', 'Easy Dinner', 'Meal Prep'],
+      directions: directions,
+      blog: blog,
+      ingredients: ingredients,
+      notes: note,
     ),
     RecipePost(
       id: 2,
-      imageAssetLocation: 'location',
+      imageAssetLocation: 'assets/images/banana_pancakes.jpg',
       time: 30,
       servings: '4',
       title: 'post2',
@@ -55,10 +117,12 @@ class _PostFeedViewState extends State<PostFeedView> {
       ),
       tags: ['Dessert', 'GF', 'Paleo'],
       directions: ['test'],
+      blog: blog,
+      ingredients: ingredients,
     ),
     const Post(
       id: 3,
-      imageAssetLocation: 'location',
+      imageAssetLocation: 'assets/images/honey_harissa.jpeg',
       title: 'post3',
       profile: Profile(
         id: 1,

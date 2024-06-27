@@ -1,105 +1,226 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:savrd/src/post/image_tile.dart';
 import 'package:savrd/src/post/post_app_bar.dart';
-import 'package:savrd/src/post/post_tile.dart';
-
-import '../profile/profile.dart';
 import 'post.dart';
 
-double _tabHeight = 30;
-
 /// Displays a list of SampleItems.
-class PostView extends StatefulWidget {
+class PostView extends StatelessWidget {
   const PostView({
     super.key,
+    required this.post,
   });
+
+  final Post post;
 
   static const routeName = '/post';
 
   @override
-  State<PostView> createState() => _PostViewState();
-}
-
-class _PostViewState extends State<PostView> {
-  int currentPageIndex = 0;
-
-  final List<Post> items = [
-    RecipePost(
-      id: 1,
-      imageAssetLocation: 'location',
-      title: 'Chocolate Banana Bread',
-      time: 30,
-      description: 'Delicious banana bread',
-      servings: '4-6',
-      profile: const Profile(
-        id: 1,
-        imageAssetLocation: 'assets/images/green_dutch_oven.png',
-        handle: 'Savrd food',
-        name: 'SAVRD',
-      ),
-      tags: ['Dessert', 'GF', 'Paleo'],
-      directions: ['eat food'],
-    ),
-    RecipePost(
-      id: 2,
-      imageAssetLocation: 'location',
-      time: 30,
-      servings: '4',
-      title: 'post2',
-      description: 'Delicious banana bread',
-      profile: const Profile(
-        id: 1,
-        imageAssetLocation: 'assets/images/green_dutch_oven.png',
-        handle: 'proflie2',
-        name: 'SAVRD',
-      ),
-      tags: ['Dessert', 'GF', 'Paleo'],
-      directions: ['test'],
-    ),
-    const Post(
-      id: 3,
-      imageAssetLocation: 'location',
-      title: 'post3',
-      profile: Profile(
-        id: 1,
-        imageAssetLocation: 'assets/images/green_dutch_oven.png',
-        handle: 'Profile3',
-        name: 'SAVRD',
-      ),
-    ),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    Post postLocal = post;
+    bool isRecipe = postLocal is RecipePost;
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
       animationDuration: const Duration(milliseconds: 600),
       child: Scaffold(
-        // To work with lists that may contain a large number of items, it’s best
-        // to use the ListView.builder constructor.
-        //
-        // In contrast to the default ListView constructor, which requires
-        // building all Widgets up front, the ListView.builder constructor lazily
-        // builds Widgets as they’re scrolled into view.
         body: SafeArea(
           child: NestedScrollView(
             headerSliverBuilder: buildHeaderSliverBuilder(),
-            body: ListView.builder(
-              // Providing a restorationId allows the ListView to restore the
-              // scroll position when a user leaves and returns to the app after it
-              // has been killed while running in the background.
-              restorationId: 'postView',
-              padding: EdgeInsets.zero,
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                final item = items[index];
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ImageTile(
+                      postLocal.imageAssetLocation,
+                    ),
+                    // FIXME: refactor post lable used in post tile
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        postLocal.title,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                    if (isRecipe)
+                      IntrinsicHeight(
+                          child: Row(
+                        children: [
+                          Text(postLocal.time.toString()),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.clock,
+                            size: 15,
+                          ),
+                          const VerticalDivider(
+                            indent: 3,
+                            endIndent: 3,
+                            thickness: 1.5,
+                          ),
+                          Text(postLocal.servings),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.userGroup,
+                            size: 15,
+                          ),
+                        ],
+                      )),
+                    // generate tag widgets from list of strings
+                    if (isRecipe)
+                      IntrinsicHeight(
+                        child: Row(children: [
+                          ...List.generate(postLocal.tags.length * 2 - 1,
+                              (item) {
+                            if (item.isEven) {
+                              return Text(postLocal.tags[item ~/ 2]);
+                            }
+                            return const VerticalDivider(
+                              indent: 3,
+                              endIndent: 3,
+                              thickness: 1.5,
+                            );
+                          }),
+                        ]),
+                      ),
+                    // FIXME: Refactor the two below widgets
+                    if (isRecipe)
+                      Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text(
+                            postLocal.description,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          )),
+                    // FIXME: group
+                    if (isRecipe)
+                      if (postLocal.blog != null)
+                        Section(
+                          title: 'Blog',
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Text(
+                              postLocal.blog!,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
 
-                return PostTile(post: item);
-              },
+                    if (isRecipe)
+                      Section(
+                        title: "Ingredients",
+                        child: ListView(
+                          restorationId: 'ingredientView',
+                          padding: EdgeInsets.zero,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            ...List.generate(
+                              postLocal.ingredients.length,
+                              (int index) {
+                                final ingredient = postLocal.ingredients[index];
+
+                                return ListTile(
+                                  title: Text(
+                                    ingredient,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                );
+                              },
+                              growable: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (isRecipe)
+                      Section(
+                        title: "Directions",
+                        child: ListView(
+                          restorationId: 'directionsView',
+                          padding: EdgeInsets.zero,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            ...List.generate(
+                              postLocal.directions.length,
+                              (int index) {
+                                final direction = postLocal.directions[index];
+
+                                return ListTile(
+                                  title: Text(
+                                    direction,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  leading: Text(
+                                    (index + 1).toString(),
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                );
+                              },
+                              growable: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (isRecipe)
+                      if (postLocal.notes != null)
+                        Section(
+                          title: "Notes",
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Text(
+                              postLocal.notes!,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
+
+class Section extends StatelessWidget {
+  const Section({
+    super.key,
+    required this.child,
+    required this.title,
+  });
+
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall?.apply(
+                decoration: TextDecoration.underline,
+              ),
+        ),
+        child,
+      ],
+    );
+  }
+}
+
+class PostViewArguments {
+  final Post post;
+
+  PostViewArguments({required this.post});
 }

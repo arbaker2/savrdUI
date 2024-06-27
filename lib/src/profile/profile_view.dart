@@ -192,7 +192,7 @@ class ProfileView extends StatelessWidget {
                   );
                 } else {
                   return const ImageTile(
-                    'assets/images/jambalya.jpg',
+                    'assets/images/jambalaya.jpg',
                   );
                 }
               }),

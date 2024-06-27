@@ -111,7 +111,8 @@ class MyApp extends StatelessWidget {
                         routeSettings.arguments as ProfileViewArguments;
                     return ProfileView(profile: args.profile);
                   case PostView.routeName:
-                    return const PostView();
+                    final args = routeSettings.arguments as PostViewArguments;
+                    return PostView(post: args.post);
                   case PostFeedView.routeName:
                     return const PostFeedView();
                   default:

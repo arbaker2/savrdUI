@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:savrd/src/post/post_view.dart';
 import 'package:savrd/src/profile/profile_view.dart';
 import 'package:savrd/src/profile/user_icon.dart';
 import 'package:savrd/src/post/post.dart';
@@ -44,10 +45,14 @@ class PostTile extends StatelessWidget {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: ImageTile(
-              'assets/images/banana_bread.jpg',
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: GestureDetector(
+              onTap: () => Navigator.pushNamed(context, PostView.routeName,
+                  arguments: PostViewArguments(post: post)),
+              child: ImageTile(
+                post.imageAssetLocation,
+              ),
             ),
           ),
           Text(
