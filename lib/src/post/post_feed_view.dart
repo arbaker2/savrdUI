@@ -69,7 +69,7 @@ class _PostFeedViewState extends State<PostFeedView> {
       imageAssetLocation: 'assets/images/banana_bread.jpg',
       title: 'Chocolate Banana Bread',
       time: 30,
-      description: 'Delicious banana bread',
+      caption: 'Delicious banana bread',
       servings: '4-6',
       profile: const Profile(
         id: 1,
@@ -88,7 +88,7 @@ class _PostFeedViewState extends State<PostFeedView> {
       imageAssetLocation: 'assets/images/jambalaya.jpg',
       title: 'Jambalaya',
       time: 60,
-      description:
+      caption:
           'A delcicious cajun casserole with chicken and andouille sausage sure to have your loved ones coming back for seconds!',
       servings: '4-6',
       profile: const Profile(
@@ -109,7 +109,7 @@ class _PostFeedViewState extends State<PostFeedView> {
       time: 30,
       servings: '4',
       title: 'post2',
-      description: 'Delicious banana bread',
+      caption: 'Delicious banana bread',
       profile: const Profile(
         id: 1,
         imageAssetLocation: 'assets/images/green_dutch_oven.png',
@@ -131,6 +131,7 @@ class _PostFeedViewState extends State<PostFeedView> {
         handle: 'Profile3',
         name: 'SAVRD',
       ),
+      caption: "test descritpion",
     ),
   ];
 

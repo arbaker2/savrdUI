@@ -7,6 +7,7 @@ class Post {
   final String imageAssetLocation;
   final String title;
   final Profile profile;
+  final String caption;
   // TODO: change this datatype for rich text
   final String? blog;
 
@@ -15,6 +16,7 @@ class Post {
     required this.imageAssetLocation,
     required this.title,
     required this.profile,
+    required this.caption,
     // TODO: give blog a class and allow it to have a title and rich text with sections of its own
     this.blog,
   });
@@ -26,7 +28,6 @@ class RecipePost extends Post {
   // TODO: require hours and minutes
   final int time;
   final String servings;
-  final String description;
   final List<String> tags;
   final List<Ingredient> ingredients;
   // TODO: creat direction class
@@ -40,10 +41,10 @@ class RecipePost extends Post {
     required super.profile,
     required this.time,
     required this.servings,
-    required this.description,
     required this.tags,
     required this.directions,
     required this.ingredients,
+    required super.caption,
     super.blog,
     // FIXME: Parent class for notes and blog to abstract off of?
     this.notes,

@@ -91,7 +91,7 @@ class PostView extends StatelessWidget {
                     // FIXME: Refactor the two below widgets
                     if (isRecipe)
                       Text(
-                        postLocal.description,
+                        postLocal.caption,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     // FIXME: group
