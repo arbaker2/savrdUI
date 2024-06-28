@@ -148,17 +148,12 @@ class PostView extends StatelessWidget {
                       ),
                     if (isRecipe)
                       Section(
-                        child: ListView(
-                          restorationId: 'directionsView',
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
+                        child: Column(
                           children: <Widget>[
                             ...List.generate(
                               postLocal.directions.length,
                               (int index) {
                                 final direction = postLocal.directions[index];
-
                                 return Card(
                                   child: ListTile(
                                     title: RichText(
