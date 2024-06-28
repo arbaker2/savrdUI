@@ -33,12 +33,6 @@ class PostView extends StatelessWidget {
                     postLocal.imageAssetLocation,
                   ),
                   PostLabel(post: post),
-                  // FIXME: Refactor the two below widgets
-                  if (isRecipe)
-                    Text(
-                      postLocal.caption,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
                   if (post.blog != null)
                     Section(
                       child: Text(

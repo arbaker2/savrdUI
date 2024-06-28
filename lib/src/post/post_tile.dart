@@ -20,37 +20,37 @@ class PostTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(
-              context,
-              ProfileView.routeName,
-              arguments: ProfileViewArguments(
-                profile: const Profile(
-                  id: 1,
-                  imageAssetLocation: 'assets/images/green_dutch_oven.png',
-                  handle: 'Savrd food',
-                  name: 'SAVRD',
-                ),
-              ),
-            ),
-            child: Row(
-              children: [
-                const UserIcon(
-                  imageLocation: 'assets/images/green_dutch_oven.png',
-                ),
-                Text(' ${post.profile.handle}',
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: GestureDetector(
-              onTap: () => Navigator.pushNamed(context, PostView.routeName,
-                  arguments: PostViewArguments(post: post)),
-              child: ImageTile(
-                post.imageAssetLocation,
+              onTap: () => Navigator.pushNamed(
+                context,
+                ProfileView.routeName,
+                arguments: ProfileViewArguments(
+                  profile: const Profile(
+                    id: 1,
+                    imageAssetLocation: 'assets/images/green_dutch_oven.png',
+                    handle: 'Savrd food',
+                    name: 'SAVRD',
+                  ),
+                ),
               ),
+              child: Row(
+                children: [
+                  const UserIcon(
+                    imageLocation: 'assets/images/green_dutch_oven.png',
+                  ),
+                  Text(' ${post.profile.handle}',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, PostView.routeName,
+                arguments: PostViewArguments(post: post)),
+            child: ImageTile(
+              post.imageAssetLocation,
             ),
           ),
           PostLabel(post: post),
@@ -85,61 +85,73 @@ class PostLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     Post postLocal = post;
     bool isRecipe = postLocal is RecipePost;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          post.title,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        if (isRecipe)
-          Column(
-            children: [
-              IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Text(postLocal.time.toString()),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    const FaIcon(
-                      FontAwesomeIcons.clock,
-                      size: 15,
-                    ),
-                    const VerticalDivider(
-                      indent: 3,
-                      endIndent: 3,
-                      thickness: 1.5,
-                    ),
-                    Text(postLocal.servings),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    const FaIcon(
-                      FontAwesomeIcons.userGroup,
-                      size: 15,
-                    ),
-                  ],
-                ),
-              ),
-              // generate tag widgets from list of strings
-              IntrinsicHeight(
-                child: Row(children: [
-                  ...List.generate(postLocal.tags.length * 2 - 1, (item) {
-                    if (item.isEven) {
-                      return Text(postLocal.tags[item ~/ 2]);
-                    }
-                    return const VerticalDivider(
-                      indent: 3,
-                      endIndent: 3,
-                      thickness: 1.5,
-                    );
-                  }),
-                ]),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            post.title,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
-      ],
+          if (isRecipe)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      Text(postLocal.time.toString()),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      const FaIcon(
+                        FontAwesomeIcons.clock,
+                        size: 15,
+                      ),
+                      const VerticalDivider(
+                        indent: 3,
+                        endIndent: 3,
+                        thickness: 1.5,
+                      ),
+                      Text(postLocal.servings),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      const FaIcon(
+                        FontAwesomeIcons.userGroup,
+                        size: 15,
+                      ),
+                    ],
+                  ),
+                ),
+                // generate tag widgets from list of strings
+                IntrinsicHeight(
+                  child: Row(children: [
+                    ...List.generate(postLocal.tags.length * 2 - 1, (item) {
+                      if (item.isEven) {
+                        return Text(postLocal.tags[item ~/ 2]);
+                      }
+                      return const VerticalDivider(
+                        indent: 3,
+                        endIndent: 3,
+                        thickness: 1.5,
+                      );
+                    }),
+                  ]),
+                ),
+              ],
+            ),
+          // FIXME: allow 2 lines max with elipsis unles read more clicked
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2.0),
+            child: Text(
+              postLocal.caption,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
