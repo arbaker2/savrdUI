@@ -15,8 +15,6 @@ class PostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Post postLocal = post;
-    bool isRecipe = postLocal is RecipePost;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -55,53 +53,7 @@ class PostTile extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            post.title,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          if (isRecipe)
-            IntrinsicHeight(
-                child: Row(
-              children: [
-                Text(postLocal.time.toString()),
-                const SizedBox(
-                  width: 2,
-                ),
-                const FaIcon(
-                  FontAwesomeIcons.clock,
-                  size: 15,
-                ),
-                const VerticalDivider(
-                  indent: 3,
-                  endIndent: 3,
-                  thickness: 1.5,
-                ),
-                Text(postLocal.servings),
-                const SizedBox(
-                  width: 2,
-                ),
-                const FaIcon(
-                  FontAwesomeIcons.userGroup,
-                  size: 15,
-                ),
-              ],
-            )),
-          // generate tag widgets from list of strings
-          if (isRecipe)
-            IntrinsicHeight(
-              child: Row(children: [
-                ...List.generate(postLocal.tags.length * 2 - 1, (item) {
-                  if (item.isEven) {
-                    return Text(postLocal.tags[item ~/ 2]);
-                  }
-                  return const VerticalDivider(
-                    indent: 3,
-                    endIndent: 3,
-                    thickness: 1.5,
-                  );
-                }),
-              ]),
-            ),
+          PostLabel(post: post),
           const Padding(
             padding: EdgeInsets.only(top: 2),
             child: Row(
@@ -120,6 +72,74 @@ class PostTile extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PostLabel extends StatelessWidget {
+  const PostLabel({super.key, required this.post});
+
+  final Post post;
+
+  @override
+  Widget build(BuildContext context) {
+    Post postLocal = post;
+    bool isRecipe = postLocal is RecipePost;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          post.title,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        if (isRecipe)
+          Column(
+            children: [
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Text(postLocal.time.toString()),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    const FaIcon(
+                      FontAwesomeIcons.clock,
+                      size: 15,
+                    ),
+                    const VerticalDivider(
+                      indent: 3,
+                      endIndent: 3,
+                      thickness: 1.5,
+                    ),
+                    Text(postLocal.servings),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    const FaIcon(
+                      FontAwesomeIcons.userGroup,
+                      size: 15,
+                    ),
+                  ],
+                ),
+              ),
+              // generate tag widgets from list of strings
+              IntrinsicHeight(
+                child: Row(children: [
+                  ...List.generate(postLocal.tags.length * 2 - 1, (item) {
+                    if (item.isEven) {
+                      return Text(postLocal.tags[item ~/ 2]);
+                    }
+                    return const VerticalDivider(
+                      indent: 3,
+                      endIndent: 3,
+                      thickness: 1.5,
+                    );
+                  }),
+                ]),
+              ),
+            ],
+          ),
+      ],
     );
   }
 }
