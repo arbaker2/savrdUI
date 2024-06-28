@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:savrd/src/post/image_tile.dart';
 import 'package:savrd/src/post/post_app_bar.dart';
 import 'package:savrd/src/post/post_tile.dart';
@@ -40,103 +39,105 @@ class PostView extends StatelessWidget {
                       postLocal.caption,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                  // FIXME: group
-                  if (isRecipe)
-                    if (postLocal.blog != null)
-                      Section(
-                        child: Text(
-                          postLocal.blog!,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                  if (isRecipe)
+                  if (post.blog != null)
                     Section(
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  ...List.generate(
-                                    postLocal.ingredients.length,
-                                    (int index) {
-                                      final ingredient =
-                                          postLocal.ingredients[index];
-                                      return RichText(
-                                        text: TextSpan(
-                                          text: ingredient.amount,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge,
-                                          children: [
-                                            TextSpan(
-                                              text: ingredient.item,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium,
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                    growable: false,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: Text(
+                        postLocal.blog!,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
-                  if (isRecipe)
-                    Section(
-                      child: Column(
-                        children: <Widget>[
-                          ...List.generate(
-                            postLocal.directions.length,
-                            (int index) {
-                              final direction = postLocal.directions[index];
-                              return Card(
-                                child: ListTile(
-                                  title: RichText(
-                                    text: TextSpan(
-                                      text: "${index + 1} ",
-                                      style:
-                                          Theme.of(context).textTheme.bodyLarge,
-                                      children: [
-                                        TextSpan(
-                                          text: direction,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            growable: false,
-                          ),
-                        ],
-                      ),
-                    ),
-                  if (isRecipe)
-                    if (postLocal.notes != null)
-                      Section(
-                        child: Text(
-                          postLocal.notes!,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
+                  if (isRecipe) RecipeElements(post: postLocal),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class RecipeElements extends StatelessWidget {
+  const RecipeElements({super.key, required this.post});
+
+  final RecipePost post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Section(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ...List.generate(
+                        post.ingredients.length,
+                        (int index) {
+                          final ingredient = post.ingredients[index];
+                          return RichText(
+                            text: TextSpan(
+                              text: ingredient.amount,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              children: [
+                                TextSpan(
+                                  text: ingredient.item,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        growable: false,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Section(
+          child: Column(
+            children: <Widget>[
+              ...List.generate(
+                post.directions.length,
+                (int index) {
+                  final direction = post.directions[index];
+                  return Card(
+                    child: ListTile(
+                      title: RichText(
+                        text: TextSpan(
+                          text: "${index + 1} ",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          children: [
+                            TextSpan(
+                              text: direction,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                growable: false,
+              ),
+            ],
+          ),
+        ),
+        if (post.notes != null)
+          Section(
+            child: Text(
+              post.notes!,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+      ],
     );
   }
 }
