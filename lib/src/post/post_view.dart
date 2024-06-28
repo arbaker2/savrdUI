@@ -157,7 +157,7 @@ class Section extends StatelessWidget {
             thickness: 1,
             indent: indent,
             endIndent: indent,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.primary.withAlpha(140),
           ),
         ),
         child,
