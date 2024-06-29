@@ -153,7 +153,8 @@ class _PostFeedViewState extends State<PostFeedView> {
             headerSliverBuilder: buildHeaderSliverBuilder(
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.settings),
+                  icon: const Hero(
+                      tag: 'settings-hero', child: Icon(Icons.settings)),
                   onPressed: () {
                     // Navigate to the settings page. If the user leaves and returns
                     // to the app after it has been killed while running in the

@@ -17,7 +17,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Hero(tag: 'settings-hero', child: Icon(Icons.settings)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
