@@ -20,35 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final textTheme = Theme.of(context).textTheme;
-
-    // Configure Text theme
-    //   final TextTheme textTheme = TextTheme(
-    //   displayLarge: GoogleFonts.ptSerif(
-    //       fontSize: 102, fontWeight: FontWeight.w300, letterSpacing: -1.5),
-    //   displayMedium: GoogleFonts.ptSerif(
-    //       fontSize: 64, fontWeight: FontWeight.w300, letterSpacing: -0.5),
-    //   displaySmall: GoogleFonts.ptSerif(fontSize: 51, fontWeight: FontWeight.w400),
-    //   headlineMedium: GoogleFonts.ptSerif(
-    //       fontSize: 36, fontWeight: FontWeight.w400, letterSpacing: 0.25),
-    //   headlineSmall: GoogleFonts.ptSerif(fontSize: 25, fontWeight: FontWeight.w400),
-    //   titleLarge: GoogleFonts.ptSerif(
-    //       fontSize: 21, fontWeight: FontWeight.w500, letterSpacing: 0.15),
-    //   titleMedium: GoogleFonts.ptSerif(
-    //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.15),
-    //   titleSmall: GoogleFonts.ptSerif(
-    //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 0.1),
-    //   bodyLarge: GoogleFonts.ptSans(
-    //       fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.5),
-    //   bodyMedium: GoogleFonts.ptSans(
-    //       fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.25),
-    //   labelLarge: GoogleFonts.ptSans(
-    //       fontSize: 15, fontWeight: FontWeight.w500, letterSpacing: 1.25),
-    //   bodySmall: GoogleFonts.ptSans(
-    //       fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.4),
-    //   labelSmall: GoogleFonts.ptSans(
-    //       fontSize: 11, fontWeight: FontWeight.w400, letterSpacing: 1.5),
-    // );
     // Glue the SettingsController to the MaterialApp.
     //
     // The ListenableBuilder Widget listens to the SettingsController for changes.
@@ -138,8 +109,6 @@ ThemeData _buildTheme() {
       onSecondary: Color(0xFFFCF6E6),
       error: Color(0xFFFF6961),
       onError: Color(0xFFFFFAFA),
-      background: Color(0xFFFCF6E6),
-      onBackground: Color(0xFF958D77),
       surface: Color(0xFFFCF6E6),
       onSurface: Color(0xFF958D77),
       tertiary: Color(0xFFF9EBC7));
@@ -156,10 +125,10 @@ ThemeData _buildTheme() {
   );
 
   //FIXME: is this function needed?
-  IconThemeData getIconTheme(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.selected
+  IconThemeData getIconTheme(Set<WidgetState> states) {
+    const Set<WidgetState> interactiveStates = <WidgetState>{
+      WidgetState.pressed,
+      WidgetState.selected
     };
     if (states.any(interactiveStates.contains)) {
       return baseIconTheme.copyWith(size: 32);
@@ -205,13 +174,13 @@ ThemeData _buildTheme() {
     colorScheme: colorScheme,
     iconTheme: baseIconTheme,
     tabBarTheme: TabBarTheme(
-        overlayColor: MaterialStateProperty.all(Colors.transparent)),
+        overlayColor: WidgetStateProperty.all(Colors.transparent)),
     navigationBarTheme: NavigationBarThemeData(
         height: 38,
         elevation: 4,
         shadowColor: colorScheme.primary,
         indicatorColor: colorScheme.background,
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
-        iconTheme: MaterialStateProperty.resolveWith(getIconTheme)),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+        iconTheme: WidgetStateProperty.resolveWith(getIconTheme)),
   );
 }
