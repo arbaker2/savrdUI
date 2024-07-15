@@ -23,15 +23,16 @@ class PostTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: GestureDetector(
-              onTap: () => Navigator.pushNamed(
+              onTap: () => Navigator.push(
                 context,
-                ProfileView.routeName,
-                arguments: ProfileViewArguments(
-                  profile: const Profile(
-                    id: 1,
-                    imageAssetLocation: 'assets/images/green_dutch_oven.png',
-                    handle: 'Savrd food',
-                    name: 'SAVRD',
+                MaterialPageRoute(
+                  builder: (context) => const ProfileView(
+                    profile: Profile(
+                      id: 1,
+                      imageAssetLocation: 'assets/images/green_dutch_oven.png',
+                      handle: 'Savrd food',
+                      name: 'SAVRD',
+                    ),
                   ),
                 ),
               ),
@@ -47,8 +48,11 @@ class PostTile extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, PostView.routeName,
-                arguments: PostViewArguments(post: post)),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                  builder: (context) => PostView(post: post)),
+            ),
             child: ImageTile(
               post.imageAssetLocation,
             ),

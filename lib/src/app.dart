@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          home: const PostFeedView(),
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
@@ -68,30 +69,30 @@ class MyApp extends StatelessWidget {
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  // extra guard statement to only go to profile view with proper arguments
-                  case ProfileView.routeName
-                      when routeSettings.arguments is ProfileViewArguments:
-                    final args =
-                        routeSettings.arguments as ProfileViewArguments;
-                    return ProfileView(profile: args.profile);
-                  case PostView.routeName:
-                    final args = routeSettings.arguments as PostViewArguments;
-                    return PostView(post: args.post);
-                  case PostFeedView.routeName:
-                    return const PostFeedView();
-                  default:
-                    return const PostFeedView();
-                }
-              },
-            );
-          },
+          // onGenerateRoute: (RouteSettings routeSettings) {
+          //   return MaterialPageRoute<void>(
+          //     settings: routeSettings,
+          //     builder: (BuildContext context) {
+          //       switch (routeSettings.name) {
+          //         case SettingsView.routeName:
+          //           return SettingsView(controller: settingsController);
+          //         // extra guard statement to only go to profile view with proper arguments
+          //         case ProfileView.routeName
+          //             when routeSettings.arguments is ProfileViewArguments:
+          //           final args =
+          //               routeSettings.arguments as ProfileViewArguments;
+          //           return ProfileView(profile: args.profile);
+          //         case PostView.routeName:
+          //           final args = routeSettings.arguments as PostViewArguments;
+          //           return PostView(post: args.post);
+          //         case PostFeedView.routeName:
+          //           return const PostFeedView();
+          //         default:
+          //           return const PostFeedView();
+          //       }
+          //     },
+          //   );
+          // },
         );
       },
     );
@@ -173,8 +174,8 @@ ThemeData _buildTheme() {
     scaffoldBackgroundColor: const Color(0xFFFCF6E6),
     colorScheme: colorScheme,
     iconTheme: baseIconTheme,
-    tabBarTheme: TabBarTheme(
-        overlayColor: WidgetStateProperty.all(Colors.transparent)),
+    tabBarTheme:
+        TabBarTheme(overlayColor: WidgetStateProperty.all(Colors.transparent)),
     navigationBarTheme: NavigationBarThemeData(
         height: 38,
         elevation: 4,

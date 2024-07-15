@@ -11,8 +11,6 @@ class ProfileView extends StatelessWidget {
 
   final Profile profile;
 
-  static const routeName = '/profile';
-
   static const double infoHeight = 188;
   static const double iconHeight = 140;
   static const double actionHeight = infoHeight - iconHeight;
@@ -40,8 +38,7 @@ class ProfileView extends StatelessWidget {
                 IconButton(
                   icon: IconButton(
                     icon: const FaIcon(FontAwesomeIcons.ellipsis),
-                    onPressed: () => Navigator.restorablePushNamed(
-                        context, PostView.routeName),
+                    onPressed: () {},
                   ),
                   onPressed: () {},
                 ),
@@ -231,10 +228,4 @@ class StatLabel extends StatelessWidget {
       ),
     );
   }
-}
-
-class ProfileViewArguments {
-  final Profile profile;
-
-  ProfileViewArguments({required this.profile});
 }

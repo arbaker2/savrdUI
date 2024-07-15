@@ -15,8 +15,6 @@ class PostFeedView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/postFeed';
-
   @override
   State<PostFeedView> createState() => _PostFeedViewState();
 }
@@ -159,8 +157,11 @@ class _PostFeedViewState extends State<PostFeedView> {
                     // Navigate to the settings page. If the user leaves and returns
                     // to the app after it has been killed while running in the
                     // background, the navigation stack is restored.
-                    Navigator.restorablePushNamed(
-                        context, SettingsView.routeName);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute<void>(
+                    //       builder: (context) => SettingsView()),
+                    // );
                   },
                 ),
               ],

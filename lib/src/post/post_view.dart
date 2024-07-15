@@ -13,8 +13,6 @@ class PostView extends StatelessWidget {
 
   final Post post;
 
-  static const routeName = '/post';
-
   @override
   Widget build(BuildContext context) {
     Post postLocal = post;
@@ -164,10 +162,4 @@ class Section extends StatelessWidget {
       ],
     );
   }
-}
-
-class PostViewArguments {
-  final Post post;
-
-  PostViewArguments({required this.post});
 }
